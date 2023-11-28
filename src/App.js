@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
+import { Homepage } from "./Containers/Homepage";
+import { Login } from "./Containers/Login/Login";
+import { Register } from "./Containers/Login/Register";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAllTrainers } from "./Actions/TrainerAction";
+
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllTrainers())
+    // eslint-disable-next-line
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/home" Component={Homepage} />
+          <Route path="/login" Component={Login} />
+          <Route path="/register" Component={Register} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
